@@ -3,18 +3,23 @@ import ToDoSearch from "../components/ToDoSearch";
 import ToDoList from "../components/ToDoList";
 import CreateToDoButton from "../components/CreateToDoButton";
 import ToDoItem from "../components/ToDoItem";
+import { TodosLoading } from "../components/TodosLoading";
+import { TodosError } from "../components/TodosError";
+import { CreateFirstTodo } from "../components/CreateFirstTodo";
+
 
 function AppUI({
-    completedTodos,
-    searchValue,
-    setSearchValue,
-    searchedTodos,
-    todos,
-    finishTodo,
-    deleteTodo
+  loading,
+  error,
+  completedTodos,
+  searchValue,
+  setSearchValue,
+  searchedTodos,
+  todos,
+  finishTodo,
+  deleteTodo,
 }) {
-
-    return (
+  return (
     <div className="min-h-screen bg-slate-100 flex items-start justify-center pt-16 pb-24 px-4">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
         <h1 className="text-5xl text-blue-600 font-extrabold text-center mb-2">
@@ -22,6 +27,9 @@ function AppUI({
         </h1>
         <ToDoCounter total={todos.length} completed={completedTodos} />
         <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+        {loading && <TodosLoading/>}
+        {error && <TodosError/>}
+        {!loading && searchedTodos.length == 0 && <CreateFirstTodo/>}
         <ToDoList>
           {searchedTodos.map((task) => (
             <ToDoItem
@@ -39,4 +47,4 @@ function AppUI({
   );
 }
 
-export default AppUI
+export default AppUI;
