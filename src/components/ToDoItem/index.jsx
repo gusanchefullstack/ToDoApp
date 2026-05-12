@@ -1,7 +1,9 @@
 import { BsCheckLg } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { TodoContext } from "../../context/TodoContext";
 
-const ToDoItem = ({ text, completed, onComplete, onDelete }) => {
+const ToDoItem = ({onComplete, text, completed, onDelete}) => {
+   
   return (
     <li className="flex items-center gap-4 bg-white border border-slate-100 rounded-xl shadow-sm px-4 py-3 hover:shadow-md transition-shadow">
       <button

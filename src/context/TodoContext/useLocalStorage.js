@@ -27,7 +27,7 @@ function useLocalStorage(itemName, initialValue) {
         setError(true);
       }
     }, 3000);
-  },[initialValue, itemName]);
+  },[itemName]);
 
   function saveItem(newArrayOfItem) {
     localStorage.setItem(itemName, JSON.stringify(newArrayOfItem));

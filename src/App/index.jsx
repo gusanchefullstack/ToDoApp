@@ -1,10 +1,24 @@
 import React from "react";
-import { useState } from "react";
-import { useLocalStorage } from "./useLocalStorage";
 import AppUI from "./AppUI";
 import "./App.css";
+import { TodoProvider } from "../context/TodoContext";
 
 function App() {
+  return (
+    <TodoProvider>
+      <AppUI />
+    </TodoProvider>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
   // const listOfTasks = [
   //   { id: 1, text: "Estudiar React", completed: false },
   //   { id: 2, text: "Configurar el entorno de Node.js", completed: false },
@@ -17,44 +31,3 @@ function App() {
   //   { id: 9, text: "Optimizar rendimiento de imágenes", completed: false },
   //   { id: 10, text: "Realizar pruebas unitarias con Jest", completed: false },
   // ];
-
-  const [searchValue, setSearchValue] = useState("");
-  const { item: todos, saveItem: saveTodos, loading, error } =
-    useLocalStorage("TODOSv1", []);
-  const completedTodos = todos.filter((todo) => todo.completed).length;
-  const searchedTodos = todos.filter((todo) =>
-    todo.text.toLowerCase().includes(searchValue.toLocaleLowerCase()),
-  );
-
-  const finishTodo = (todoId) => {
-    const updatedListOfTodos = [...todos];
-    const todoIndex = updatedListOfTodos.findIndex(
-      (todo) => todo.id === todoId,
-    );
-    updatedListOfTodos[todoIndex].completed = true;
-    saveTodos(updatedListOfTodos);
-  };
-  const deleteTodo = (todoId) => {
-    const updatedListOfTodos = [...todos];
-    const todoIndex = updatedListOfTodos.findIndex(
-      (todo) => todo.id === todoId,
-    );
-    updatedListOfTodos.splice(todoIndex, 1);
-    saveTodos(updatedListOfTodos);
-  };
-
-  return (
-    <AppUI
-      loading={loading}
-      error={error}
-      todos={todos}
-      completedTodos={completedTodos}
-      setSearchValue={setSearchValue}
-      searchedTodos={searchedTodos}
-      finishTodo={finishTodo}
-      deleteTodo={deleteTodo}
-    />
-  );
-}
-
-export default App;

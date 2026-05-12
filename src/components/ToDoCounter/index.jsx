@@ -1,4 +1,9 @@
-const ToDoCount = ({ completed, total }) => {
+import { useContext } from "react";
+import { TodoContext } from "../../context/TodoContext";
+
+
+const ToDoCounter = () => {
+  const {completed, total} = useContext(TodoContext)
   return completed === total ? (
     <p className="text-lg font-medium text-slate-500 text-center mt-2 mb-6 border-b border-slate-200 pb-6">
       Felicitaciones! 👏👏👏 Usa tu tiempo para algo más
@@ -10,4 +15,4 @@ const ToDoCount = ({ completed, total }) => {
     </p>
   );
 };
-export default ToDoCount;
+export default ToDoCounter;

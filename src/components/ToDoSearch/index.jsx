@@ -1,6 +1,8 @@
+import { useContext } from "react";
+import { TodoContext } from "../../context/TodoContext";
 
-const ToDoSearch = ({searchValue, setSearchValue}) => {
-
+const ToDoSearch = () => {
+  const {searchValue, setSearchValue} = useContext(TodoContext)
   return (
     <div className="w-full my-6">
       <input

@@ -6,31 +6,25 @@ import ToDoItem from "../components/ToDoItem";
 import { TodosLoading } from "../components/TodosLoading";
 import { TodosError } from "../components/TodosError";
 import { CreateFirstTodo } from "../components/CreateFirstTodo";
+import { useContext } from "react";
+import { TodoContext } from "../context/TodoContext";
 
-
-function AppUI({
-  loading,
-  error,
-  completedTodos,
-  searchValue,
-  setSearchValue,
-  searchedTodos,
-  todos,
-  finishTodo,
-  deleteTodo,
-}) {
+function AppUI() {
+  const { loading, error, searchedTodos, finishTodo, deleteTodo } =
+    useContext(TodoContext);
   return (
     <div className="min-h-screen bg-slate-100 flex items-start justify-center pt-16 pb-24 px-4">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
         <h1 className="text-5xl text-blue-600 font-extrabold text-center mb-2">
           ToDo App
         </h1>
-        <ToDoCounter total={todos.length} completed={completedTodos} />
-        <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-        {loading && <TodosLoading/>}
-        {error && <TodosError/>}
-        {!loading && searchedTodos.length == 0 && <CreateFirstTodo/>}
+        <ToDoCounter />
+        <ToDoSearch />
+        {loading && <TodosLoading />}
+        {error && <TodosError />}
+        {!loading && searchedTodos.length == 0 && <CreateFirstTodo />}
         <ToDoList>
+          {console.log(searchedTodos)}
           {searchedTodos.map((task) => (
             <ToDoItem
               key={task.id}
