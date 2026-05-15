@@ -4,6 +4,7 @@ const TodoContext = createContext();
 
 function TodoProvider({ children }) {
   const [searchValue, setSearchValue] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const {
     item: todos,
     saveItem: saveTodos,
@@ -17,6 +18,16 @@ function TodoProvider({ children }) {
     todo.text.toLowerCase().includes(searchValue.toLocaleLowerCase()),
   );
 
+  const addToDo = (text) => {
+    const updatedListOfTodos = [...todos];
+    updatedListOfTodos.push({
+      id: Math.floor(Math.random() * 100) + 1,
+      text,
+      completed: false,
+    });
+    saveTodos(updatedListOfTodos);
+  };
+
   const finishTodo = (todoId) => {
     const updatedListOfTodos = [...todos];
     const todoIndex = updatedListOfTodos.findIndex(
@@ -25,6 +36,7 @@ function TodoProvider({ children }) {
     updatedListOfTodos[todoIndex].completed = true;
     saveTodos(updatedListOfTodos);
   };
+
   const deleteTodo = (todoId) => {
     const updatedListOfTodos = [...todos];
     const todoIndex = updatedListOfTodos.findIndex(
@@ -43,8 +55,11 @@ function TodoProvider({ children }) {
         searchValue,
         setSearchValue,
         searchedTodos,
+        addToDo,
         finishTodo,
         deleteTodo,
+        openModal,
+        setOpenModal,
       }}
     >
       {children}
