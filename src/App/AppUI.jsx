@@ -26,7 +26,6 @@ function AppUI() {
         {error && <TodosError />}
         {!loading && searchedTodos.length == 0 && <CreateFirstTodo />}
         <ToDoList>
-          {console.log(searchedTodos)}
           {searchedTodos.map((task) => (
             <ToDoItem
               key={task.id}

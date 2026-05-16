@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 import { useLocalStorage } from "./useLocalStorage";
+import { v4 as uuid} from "uuid"
+
 const TodoContext = createContext();
 
 function TodoProvider({ children }) {
@@ -21,7 +23,7 @@ function TodoProvider({ children }) {
   const addToDo = (text) => {
     const updatedListOfTodos = [...todos];
     updatedListOfTodos.push({
-      id: Math.floor(Math.random() * 100) + 1,
+      id: uuid(),
       text,
       completed: false,
     });

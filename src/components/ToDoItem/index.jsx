@@ -1,6 +1,5 @@
 import { BsCheckLg } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
-import { TodoContext } from "../../context/TodoContext";
 
 const ToDoItem = ({onComplete, text, completed, onDelete}) => {
    
